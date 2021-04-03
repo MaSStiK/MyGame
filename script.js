@@ -1,54 +1,61 @@
 document.onkeydown = checkButton;
+
 let cube = {
     x: 0,
     y: 0,
-    id: "main",
-    speed: 100
+    id: "cube",
+    width: 56,
+    height: 56,
+    trn: .25,
+    step: 100,
+    color: 'black'
 }
 
-function checkButton(e) {
-    let k = e || window.event;
+let map = {
+    width: 900,
+    height: 950
+}
 
-    //console.log(k);
+function checkButton(event) {
 
-    if (k.keyCode === 38) {
+    if (event.keyCode === 38) {
         // ArrowUp: 38
         if (cube.y > 0) {
-            cube.y = cube.y - cube.speed;
+            cube.y -= cube.step;
         }
-        console.log("ArrowUp");
     }
 
-    else if (k.keyCode === 40) {
+    if (event.keyCode === 40) {
         // ArrowDown 40
-
-        if (cube.y < 900) {
-            cube.y = cube.y + cube.speed;
+        if (cube.y < map.width) {
+            cube.y += cube.step;
         }
-        console.log("ArrowDown");
     }
 
-    else if (k.keyCode === 37) {
+    if (event.keyCode === 37) {
         // ArrowLeft: 37
         if (cube.x > 0) {
-            cube.x = cube.x - cube.speed;
+            cube.x -= cube.step;
         }
-        console.log("ArrowLeft");
     }
 
-    else if (k.keyCode === 39) {
+    if (event.keyCode === 39) {
         // ArrowRight: 39
-        if (cube.x < 1800) {
-            cube.x = cube.x + cube.speed;
+        if (cube.x < map.height) {
+            cube.x += cube.step;
         }
-        console.log("ArrowRight");
     }
-    render(cube.id, cube.x, cube.y);
+    
+    render(cube);
 }
 
-function render(id, x, y) {
-    document.getElementById(id).style.top = y + 'px';
-    document.getElementById(id).style.left = x + 'px';
-    document.getElementById(id).style.transition = 'cubic-bezier(.77,.14,.19,.85) .25s';
+function render(cube) {
+    document.getElementById(cube.id).style.top = cube.y + 'px';
+    document.getElementById(cube.id).style.left = cube.x + 'px';
+    document.getElementById(cube.id).style.transition = 'ease ' +  cube.trn + 's';
+    document.getElementById(cube.id).style.width = cube.width + 'px';
+    document.getElementById(cube.id).style.height = cube.height + 'px';
+    document.getElementById(cube.id).style.backgroundColor = cube.color;
 }
 
+render(cube); //Рендер при запуске
