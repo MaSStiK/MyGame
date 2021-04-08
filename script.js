@@ -12,37 +12,53 @@ let cube = {
 }
 
 let map = {
-    width: 900,
-    height: 950
+    width: 750,
+    height: 750
 }
 
 function checkButton(event) {
 
     if (event.keyCode === 38) {
         // ArrowUp: 38
-        if (cube.y > 0) {
+        if (cube.y - cube.step > 0) {
             cube.y -= cube.step;
+        }
+
+        else {
+            cube.y = 0;
         }
     }
 
     if (event.keyCode === 40) {
         // ArrowDown 40
-        if (cube.y < map.width) {
+        if (cube.y + cube.step < map.width) {
             cube.y += cube.step;
+        }
+
+        else {
+            cube.y = map.width;
         }
     }
 
     if (event.keyCode === 37) {
         // ArrowLeft: 37
-        if (cube.x > 0) {
+        if (cube.x - cube.step > 0) {
             cube.x -= cube.step;
+        }
+
+        else {
+            cube.x = 0;
         }
     }
 
     if (event.keyCode === 39) {
         // ArrowRight: 39
-        if (cube.x < map.height) {
+        if (cube.x + cube.step <= map.height) {
             cube.x += cube.step;
+        }
+
+        else {
+            cube.x = map.height;
         }
     }
     
@@ -56,6 +72,8 @@ function render(cube) {
     document.getElementById(cube.id).style.width = cube.width + 'px';
     document.getElementById(cube.id).style.height = cube.height + 'px';
     document.getElementById(cube.id).style.backgroundColor = cube.color;
+
+    console.log("x,y = " + cube.x + "|" + cube.y)
 }
 
 render(cube); //Рендер при запуске
