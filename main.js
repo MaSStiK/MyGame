@@ -1,6 +1,6 @@
 let cube = {
-    x: 300,
-    y: 300,
+    x: randomChoice([100,514]), // Случ. корды спавна
+    y: randomChoice([100,514]),
     id: "cube",
     width: 56,
     height: 56,
@@ -17,5 +17,5 @@ let map = {
     color: '#f5f5f5'
 }
 
-renderMap(map); //Рендер карты
-renderCube(cube); //Рендер куба
+renderMap(map); // Рендер карты
+renderCube(cube); // Рендер куба

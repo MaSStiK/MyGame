@@ -46,7 +46,7 @@ function checkButton(event) {
         }
     }
     
-    renderCube(cube);
+    renderCube(cube); // Рендер куба каждый сдвиг
 }
 
 function renderCube(cube) {
@@ -57,8 +57,8 @@ function renderCube(cube) {
     document.getElementById(cube.id).style.height = cube.height + 'px';
     document.getElementById(cube.id).style.backgroundColor = cube.color;
 
-    // Вывод координат (В.П - верхний правый угол / Н.Л - нижний левый угол)
-    console.log("(В.П) x,y = " + cube.x + "/" + cube.y + " | " + "(Н.Л) x,y = " + (cube.x + cube.step) + "/" + (cube.y + cube.step))
+    // Вывод координат (В.Л - верхний левый угол / Н.П - нижний правый угол)
+    console.log("(В.Л) x,y = " + cube.x + "/" + cube.y + " | " + "(Н.П) x,y = " + (cube.x + cube.step) + "/" + (cube.y + cube.step))
 }
 
 function renderMap(map) {
@@ -67,4 +67,8 @@ function renderMap(map) {
     document.getElementById('map').style.width = map.width + 'px';
     document.getElementById('map').style.height = map.height + 'px';
     document.getElementById('map').style.backgroundColor = map.color;
+}
+
+function randomChoice(items) { // Случайный выбор из массива
+    return items[Math.floor(Math.random() * items.length)];
 }
