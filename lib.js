@@ -15,12 +15,12 @@ function checkButton(event) {
 
     if (event.keyCode === 40) {
         // ArrowDown 40
-        if (cube.y + cube.height + cube.step < map.width + map.x) {
+        if (cube.y + cube.height + cube.step < map.height + map.y) {
             cube.y += cube.step;
         }
 
         else {
-            cube.y = map.width + map.x - cube.height;
+            cube.y = map.height + map.y - cube.height;
         }
     }
 
@@ -37,12 +37,12 @@ function checkButton(event) {
 
     if (event.keyCode === 39) {
         // ArrowRight: 39
-        if (cube.x + cube.width + cube.step < map.height + map.y) {
+        if (cube.x + cube.width + cube.step < map.width + map.x) {
             cube.x += cube.step;
         }
 
         else {
-            cube.x = map.height + map.y - cube.width;
+            cube.x = map.width + map.x - cube.width;
         }
     }
     
@@ -70,25 +70,36 @@ function renderMap(map) {
 }
 
 function spawnCube(map, cube) {
-    let mapMinX = map.x;
-    let mapMaxX = map.x + map.width - cube.width;
-    let mapMinY = map.y;
-    let mapMaxY = map.y + map.height - cube.height;
-    cube.x = Math.round(Math.random() * (mapMaxX - mapMinX) + mapMinX);
-    cube.y = Math.round(Math.random() * (mapMaxY - mapMinY) + mapMinY);
+    // let mapMinX = map.x;
+    // let mapMaxX = map.x + map.width - cube.width;
+    // let mapMinY = map.y;
+    // let mapMaxY = map.y + map.height - cube.height;
+    // cube.x = Math.round(Math.random() * (mapMaxX - mapMinX) + mapMinX); // Старый способ
+    // cube.y = Math.round(Math.random() * (mapMaxY - mapMinY) + mapMinY);
+
+    cube.x = randomInteger(map.x, map.x + map.width - cube.width);
+    cube.y = randomInteger(map.y, map.y + map.height - cube.height);
     return cube;
 }
 
+function spawnBot(map, bot) {
+    bot.x = randomInteger(map.x, map.x + map.width - bot.width);
+    bot.y = randomInteger(map.y, map.y + map.height - bot.height);
+    return bot;
+}
+
 function renderBots(bots) {
+    let i = 1;
     bots.map(bot => {
         let div = document.createElement('div');
-        div.id = 1;
+        bot.id = i;
+        div.id = i;
         div.className = 'bot';
         console.log(div);
-
         document.body.append(div);
-        renderBot(bot);
-        
+        renderBot(spawnBot(map, bot));
+
+        i++;
     });
     
 }
