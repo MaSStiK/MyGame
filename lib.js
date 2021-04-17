@@ -69,6 +69,44 @@ function renderMap(map) {
     document.getElementById('map').style.backgroundColor = map.color;
 }
 
+function spawnCube(map, cube) {
+    let mapMinX = map.x;
+    let mapMaxX = map.x + map.width - cube.width;
+    let mapMinY = map.y;
+    let mapMaxY = map.y + map.height - cube.height;
+    cube.x = Math.round(Math.random() * (mapMaxX - mapMinX) + mapMinX);
+    cube.y = Math.round(Math.random() * (mapMaxY - mapMinY) + mapMinY);
+    return cube;
+}
+
+function renderBots(bots) {
+    bots.map(bot => {
+        let div = document.createElement('div');
+        div.id = 1;
+        div.className = 'bot';
+        console.log(div);
+
+        document.body.append(div);
+        renderBot(bot);
+        
+    });
+    
+}
+
+function renderBot(bot) {
+    document.getElementById(bot.id).style.top = bot.y + 'px';
+    document.getElementById(bot.id).style.left = bot.x + 'px';
+    document.getElementById(bot.id).style.transition = 'ease ' +  bot.trn + 's';
+    document.getElementById(bot.id).style.width = bot.width + 'px';
+    document.getElementById(bot.id).style.height = bot.height + 'px';
+    document.getElementById(bot.id).style.backgroundColor = bot.color;
+}
+
 function randomChoice(items) { // Случайный выбор из массива
     return items[Math.floor(Math.random() * items.length)];
+}
+
+function randomInteger(min, max) { // Случайное число из диапазона
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
 }
