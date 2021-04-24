@@ -101,7 +101,6 @@ function renderBots(bots) {
 
         i++;
     });
-    
 }
 
 function renderBot(bot) {
@@ -113,11 +112,43 @@ function renderBot(bot) {
     document.getElementById(bot.id).style.backgroundColor = bot.color;
 }
 
+function spawnBuff(map, buff) {
+    buff.x = randomInteger(map.x, map.x + map.width - buff.width);
+    buff.y = randomInteger(map.y, map.y + map.height - buff.height);
+    return buff;
+}
+
+function renderBuffs(buffs) {
+    buffs.map(buff => {
+        let div = document.createElement('div');
+        buff.id = 'buff';
+        div.id = 'buff';
+        div.className = 'buff';
+        console.log(buff);
+        document.body.append(div);
+        renderBuff(spawnBuff(map, buff));
+    });
+}
+
+function renderBuff(buff) {
+    document.getElementById(buff.id).style.top = buff.y + 'px';
+    document.getElementById(buff.id).style.left = buff.x + 'px';
+    document.getElementById(buff.id).style.transition = 'ease ' +  buff.trn + 's';
+    document.getElementById(buff.id).style.width = buff.width + 'px';
+    document.getElementById(buff.id).style.height = buff.height + 'px';
+    document.getElementById(buff.id).style.backgroundColor = buff.color;
+}
+
+function timeTick() {
+    //console.log(new Date().getSeconds());
+    renderBuffs(buffs);
+}
+
+
 function randomChoice(items) { // Случайный выбор из массива
     return items[Math.floor(Math.random() * items.length)];
 }
 
 function randomInteger(min, max) { // Случайное число из диапазона
-    let rand = min + Math.random() * (max + 1 - min);
-    return Math.floor(rand);
+    return Math.floor(min + Math.random() * (max + 1 - min));
 }

@@ -34,6 +34,24 @@ for (let i = randomInteger(2,4); i != 0; i--) {
     bots.push(bot);
 }
 
+let buffs = [];
+
+let buff = {
+    x: 0,
+    y: 0,
+    id: 'buff',
+    width: 56,
+    height: 56,
+    trn: .25,
+    step: 56,
+    color: 'yellow'
+}
+
+buffs.push(buff);
+
 renderMap(map); // Рендер карты
 renderCube(spawnCube(map, cube)); // Рендер куба
 renderBots(bots);
+// renderBuffs(buffs);
+
+let time = setInterval(timeTick, 1000);
