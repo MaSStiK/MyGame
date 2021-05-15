@@ -46,19 +46,7 @@ function checkButton(event) {
         }
     }
     
-    renderCube(cube); // Рендер куба каждый сдвиг
-}
-
-function renderCube(cube) {
-    document.getElementById(cube.id).style.top = cube.y + 'px';
-    document.getElementById(cube.id).style.left = cube.x + 'px';
-    document.getElementById(cube.id).style.transition = 'ease ' +  cube.trn + 's';
-    document.getElementById(cube.id).style.width = cube.width + 'px';
-    document.getElementById(cube.id).style.height = cube.height + 'px';
-    document.getElementById(cube.id).style.backgroundColor = cube.color;
-
-    // Вывод координат (В.Л - верхний левый угол / Н.П - нижний правый угол)
-    console.log("(В.Л) x,y = " + cube.x + "/" + cube.y + " | " + "(Н.П) x,y = " + (cube.x + cube.step) + "/" + (cube.y + cube.step))
+    Render(cube); // Рендер куба каждый сдвиг
 }
 
 function renderMap(map) {
@@ -69,80 +57,33 @@ function renderMap(map) {
     document.getElementById('map').style.backgroundColor = map.color;
 }
 
-function spawnCube(map, cube) {
-    // let mapMinX = map.x;
-    // let mapMaxX = map.x + map.width - cube.width;
-    // let mapMinY = map.y;
-    // let mapMaxY = map.y + map.height - cube.height;
-    // cube.x = Math.round(Math.random() * (mapMaxX - mapMinX) + mapMinX); // Старый способ
-    // cube.y = Math.round(Math.random() * (mapMaxY - mapMinY) + mapMinY);
-
-    cube.x = randomInteger(map.x, map.x + map.width - cube.width);
-    cube.y = randomInteger(map.y, map.y + map.height - cube.height);
-    return cube;
-}
-
-function spawnBot(map, bot) {
-    bot.x = randomInteger(map.x, map.x + map.width - bot.width);
-    bot.y = randomInteger(map.y, map.y + map.height - bot.height);
-    return bot;
-}
-
-function renderBots(bots) {
-    let i = 1;
-    bots.map(bot => {
+function Spawn(stuff) { // Спавн любого обьекта
+    stuff.forEach(element => {
         let div = document.createElement('div');
-        bot.id = i;
-        div.id = i;
-        div.className = 'bot';
-        console.log(div);
+        div.id = element.id;
+        div.className = element.class;
         document.body.append(div);
-        renderBot(spawnBot(map, bot));
-
-        i++;
+        Render(element);
     });
 }
 
-function renderBot(bot) {
-    document.getElementById(bot.id).style.top = bot.y + 'px';
-    document.getElementById(bot.id).style.left = bot.x + 'px';
-    document.getElementById(bot.id).style.transition = 'ease ' +  bot.trn + 's';
-    document.getElementById(bot.id).style.width = bot.width + 'px';
-    document.getElementById(bot.id).style.height = bot.height + 'px';
-    document.getElementById(bot.id).style.backgroundColor = bot.color;
+function Render(stuff) { // Рендер любого обьекта
+    document.getElementById(stuff.id).style.top = stuff.y + 'px';
+    document.getElementById(stuff.id).style.left = stuff.x + 'px';
+    document.getElementById(stuff.id).style.transition = 'ease ' +  stuff.trn + 's';
+    document.getElementById(stuff.id).style.width = stuff.width + 'px';
+    document.getElementById(stuff.id).style.height = stuff.height + 'px';
+    document.getElementById(stuff.id).style.backgroundColor = stuff.color;
 }
 
-function spawnBuff(map, buff) {
-    buff.x = randomInteger(map.x, map.x + map.width - buff.width);
-    buff.y = randomInteger(map.y, map.y + map.height - buff.height);
-    return buff;
-}
+// function ReachBuff() {
+//     if 
+// }
 
-function renderBuffs(buffs) {
-    buffs.map(buff => {
-        let div = document.createElement('div');
-        buff.id = 'buff';
-        div.id = 'buff';
-        div.className = 'buff';
-        console.log(buff);
-        document.body.append(div);
-        renderBuff(spawnBuff(map, buff));
-    });
-}
-
-function renderBuff(buff) {
-    document.getElementById(buff.id).style.top = buff.y + 'px';
-    document.getElementById(buff.id).style.left = buff.x + 'px';
-    document.getElementById(buff.id).style.transition = 'ease ' +  buff.trn + 's';
-    document.getElementById(buff.id).style.width = buff.width + 'px';
-    document.getElementById(buff.id).style.height = buff.height + 'px';
-    document.getElementById(buff.id).style.backgroundColor = buff.color;
-}
-
-function timeTick() {
-    //console.log(new Date().getSeconds());
-    renderBuffs(buffs);
-}
+// function timeTick() {
+//     //console.log(new Date().getSeconds());
+//     renderBuffs(buffs);
+// }
 
 
 function randomChoice(items) { // Случайный выбор из массива
