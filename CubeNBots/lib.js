@@ -1,7 +1,8 @@
-document.onkeydown = checkButton;
+document.onkeydown = MainLogic;
 
-function checkButton(event) {
+function MainLogic(event) {
 
+    // Buttons
     if (event.keyCode === 38) {
         // ArrowUp: 38
         if (cube.y - cube.step > map.y) {
@@ -45,11 +46,15 @@ function checkButton(event) {
             cube.x = map.width + map.x - cube.width;
         }
     }
+
+    // if (true) {
+
+    // }
     
     Render(cube); // Рендер куба каждый сдвиг
 }
 
-function renderMap(map) {
+function RenderMap(map) {
     document.getElementById('map').style.top = map.y + 'px';
     document.getElementById('map').style.left = map.x + 'px';
     document.getElementById('map').style.width = map.width + 'px';
@@ -86,10 +91,10 @@ function Render(stuff) { // Рендер любого обьекта
 // }
 
 
-function randomChoice(items) { // Случайный выбор из массива
+function RandomChoice(items) { // Случайный выбор из массива
     return items[Math.floor(Math.random() * items.length)];
 }
 
-function randomInteger(min, max) { // Случайное число из диапазона
+function RandomInteger(min, max) { // Случайное число из диапазона
     return Math.floor(min + Math.random() * (max + 1 - min));
 }

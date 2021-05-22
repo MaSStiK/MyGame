@@ -9,8 +9,8 @@ let map = {
 toSpawn = []; // Массив для спавна всего
 
 let cube = {
-    x: randomInteger(map.x, map.x + map.width - 56),
-    y: randomInteger(map.y, map.y + map.height - 56),
+    x: RandomInteger(map.x, map.x + map.width - 56),
+    y: RandomInteger(map.y, map.y + map.height - 56),
     id: 'cube',
     class: 'cube',
     width: 56,
@@ -21,10 +21,10 @@ let cube = {
 }
 toSpawn.push(cube);
 
-for (let i = randomInteger(2,4); i != 0; i--) {
+for (let i = RandomInteger(2,4); i != 0; i--) {
     let bot = {
-        x: randomInteger(map.x, map.x + map.width - 56),
-        y: randomInteger(map.y, map.y + map.height - 56),
+        x: RandomInteger(map.x, map.x + map.width - 56),
+        y: RandomInteger(map.y, map.y + map.height - 56),
         id: 'bot_' + i,
         class: 'bot',
         width: 56,
@@ -37,8 +37,8 @@ for (let i = randomInteger(2,4); i != 0; i--) {
 }
 
 let buff = {
-    x: randomInteger(map.x, map.x + map.width - 56),
-    y: randomInteger(map.y, map.y + map.height - 56),
+    x: RandomInteger(map.x, map.x + map.width - 56),
+    y: RandomInteger(map.y, map.y + map.height - 56),
     id: 'buff',
     class: 'buff',
     width: 56,
@@ -50,7 +50,7 @@ let buff = {
 toSpawn.push(buff);
 console.log(toSpawn);
 
-renderMap(map); // Рендер карты
+RenderMap(map); // Рендер карты
 // renderCube(spawnCube(map, cube)); // Рендер куба
 // renderBots(bots);
 // // renderBuffs(buffs);
