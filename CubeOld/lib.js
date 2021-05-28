@@ -47,9 +47,9 @@ function MainLogic(event) {
         }
     }
 
-    // if (true) {
-
-    // }
+    if (cube.x > buff.x & cube.x > buff) {
+        console.log("кусь");
+    }
     
     Render(cube); // Рендер куба каждый сдвиг
 }
